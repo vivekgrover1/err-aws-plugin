@@ -2,6 +2,7 @@
 
 from errbot import BotPlugin, botcmd, arg_botcmd
 import boto3
+import os
 
 
 class AWS(BotPlugin):
@@ -10,8 +11,8 @@ class AWS(BotPlugin):
     """
     
     def _connect(self,region):
-        access_key=""
-        secret_key=""
+        access_key= os.environ.get('EC2_ACCESS_KEY')
+        secret_key= os.environ.get('EC2_SECRET_KEY')
         self.ec2 = boto3.resource("ec2", region_name=region,aws_access_key_id=access_key,aws_secret_access_key=secret_key)
         return self.ec2
 
