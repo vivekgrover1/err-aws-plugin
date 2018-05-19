@@ -87,11 +87,12 @@ class AWS(BotPlugin):
                 type=i.instance_type)
 
 
+    @arg_botcmd('ami_id', type=str)
     @arg_botcmd('region_name', type=str)
-    def aws_provision_instance(self,msg,region_name=None):
+    def aws_provision_instance(self,msg,region_name=None,ami_id=None):
         driver=self._connect(region_name)
         new = driver.create_instances(
-            ImageId='ami-5b673c34',
+            ImageId=ami_id,
             MinCount=1,
             MaxCount=1,
             InstanceType='t2.micro'
